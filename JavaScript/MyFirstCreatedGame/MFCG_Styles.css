@@ -1,4 +1,26 @@
+html {
+    width: 100%;
+    background: white;
+}
+
+body {
+    width: 95%;
+    margin: 0 auto;
+    background: lightblue;
+}
+
+section#gameCanvasHolder {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
 canvas {
+    display: block;
+
     border: 1px solid #d3d3d3;
     background-color: #f1f1f1;
+
+    padding-left: 0;
+    padding-right: 0;
 }

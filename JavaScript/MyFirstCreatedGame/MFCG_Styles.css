@@ -1,3 +1,4 @@
+/* Set the width and background color of the HTML, and the body. */
 html {
     width: 100%;
     background: white;
@@ -9,12 +10,14 @@ body {
     background: lightblue;
 }
 
+/* Sets up the section for all the canvases. */
 section#gameCanvasHolder {
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0px auto;
+    padding: 10px;
     display: block;
 }
 
+/* Styles for the canvas. */
 canvas {
     display: block;
 
@@ -23,4 +26,6 @@ canvas {
 
     padding-left: 0;
     padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
 }

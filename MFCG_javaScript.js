@@ -9,13 +9,14 @@ var player,
     pL = false,
     pS = false,
     pC = false,
-    pDash = false
+    pDash = false;
 // Boss variables
-var boss;
-var bHealth;
+var boss,
+    bHealth;
 // Starts Game
 function startGame() {
     player = new component(20, 20, "red", 490, 10);
+    boss = new component(40, 40, "blue", 600, 100);
     gameArena.start();
     pStamBar.start();
 }
@@ -48,10 +49,12 @@ var gameArena = {
             if (e.keyCode === 16 /* shift */ ) {
                 pS = true
             }
-            if (e.keyCode === 86 /* v */ ) {
+            if (e.keyCode === 18 /* ALT */ ) {
                 pC = true
             }
+            e.preventDefault();
         }
+
         document.addEventListener('keyup', release)
 
         function release(e) {
@@ -78,6 +81,9 @@ var gameArena = {
             if (e.keyCode === 86 /* v */ ) {
                 pC = false;
             }
+            if (e.keyCode === 18 /* ALT */ ) {
+                pC = false
+            }
         }
         document.addEventListener('keypress', press)
 
@@ -86,6 +92,23 @@ var gameArena = {
                 pDash = true;
             }
         }
+        /*var r1c1 = [],
+            r1c2 = [],
+            r1c3 = [],
+            r1c4 = [],
+            r2c1 = [],
+            r2c2 = [],
+            r2c3 = [],
+            r2c4 = [],
+            r3c1 = [],
+            r3c2 = [],
+            r3c3 = [],
+            r3c4 = [];
+        // console.log(r1c1, r1c2, r1c3, r1c4, r2c1, r2c2, r2c3, r2c4, r3c1, r3c2, r3c3, r3c4);
+
+        function arenaOb() {
+
+        }*/
     }, // Clear arena
     clear: function () {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -156,7 +179,7 @@ var pStamBar = {
             pStamReg0 = true;
         }
         if (pStamCur < 0) {
-            pStamCur = 1;
+            pStamCur = 0;
             pStamReg0 = false;
         }
         if (pStamReg0 === false) {
@@ -201,6 +224,22 @@ function updateGameArena() {
         }
     } else if (pC) {
         // Crouch
+        if (pU) {
+            player.speedY = -1;
+            pStamState = 1;
+        }
+        if (pR) {
+            player.speedX = 1;
+            pStamState = 1;
+        }
+        if (pD) {
+            player.speedY = 1;
+            pStamState = 1;
+        }
+        if (pL) {
+            player.speedX = -1;
+            pStamState = 1;
+        }
     } else {
         // Walking controls
         if (pU) {
@@ -232,4 +271,5 @@ function updateGameArena() {
     pStamBar.update();
     player.newPos();
     player.update();
+    boss.update();
 };
